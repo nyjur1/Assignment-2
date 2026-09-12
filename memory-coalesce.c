@@ -22,6 +22,8 @@ void print_freelist() {
 }
 
 void * new_malloc(size_t size) {
+
+    size = ((size+15)/16)*16;
     if(freelist == NULL) {
         printf("MMAP\n");
          // Use mmap to get anonymous, private memory
@@ -83,5 +85,25 @@ void new_free(void * ptr) {
 
     m_header *header = (m_header*)((char*)ptr-sizeof(m_header));
     header->in_use=0;
+
+    if(header->next != NULL && header->next->in_use==0){
+        header->size+= sizeof(m_header) + header->next->size;
+
+        header->next = header->next->next;
+        if(header->next!= NULL){
+            header->next->prev = header;
+        }
+    }
+
+    if(header->prev != NULL && header->prev->in_use==0){
+        header->prev->size+= sizeof(m_header) + header->size;
+
+        header->prev->next = header->next;
+        if(header->next!= NULL){
+            header->next->prev = header->prev;
+        }
+    }
+
+
 
 }
