@@ -1,4 +1,4 @@
-(1). After a program has made some calls to malloc and free,
+(1) After a program has made some calls to malloc and free,
 heap memory can become fragmented, 
 meaning that there are chunks of free heap space interspersed
  with chunks of allocated heap space (Dive Into Systems, Section 2.4). 
@@ -6,10 +6,10 @@ meaning that there are chunks of free heap space interspersed
  enough free memory, the free memomry is split into smaller blocks so there may not 
  be one continuous block large enough for certain requets. 
 
- (2). In plot-throughput.png t2.out has a better throughput. We see as the bytes 
+ (2) In plot-throughput.png t2.out has a better throughput. We see as the bytes 
  become larger it combines the free boxes more efficiently and can more easily reuse the 
  memory. 
 
- (3). In plot-fail_rate.png t2.out has a better fail rate. When allocation size 
+ (3) In plot-fail_rate.png t2.out has a better fail rate. When allocation size 
  requests increase, there is a consistent and much lower number presented. The blocks
  that were freed are now handled appropriately. 
